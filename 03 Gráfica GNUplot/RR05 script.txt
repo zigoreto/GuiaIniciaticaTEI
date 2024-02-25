@@ -1,0 +1,105 @@
+
+# Para ejecutar este script desde GNUplot, usaremos: call 'RR05 script.txt' o load 'RR05 script.txt'
+
+
+# set title 'Ángulo de reflexión $\theta_r$ frente a ángulo de incidencia $\theta_i$ en el aire.'	# Establece e imprime el título del gráfico
+# unset title												# Elimina el título del gráfico, y no lo imprime
+# set title												# Como ha borrado el título, no imprimiría nada
+# set title 'Puntos experimentales.'									# Establece e imprime el título del gráfico
+
+
+set xlabel '$\sin \theta_i$'								# Establecemos el título del eje X
+set ylabel '$\sin \theta_t$'								# Establecemos el título del eje Y
+
+
+set xrange [0:1] 									# Rango del eje X
+set yrange [0:0.8] 									# Rango del eje Y
+
+
+set xtics 0, 0.2 font "Arial, 12"							# Marcas en el eje X desde el 5 y cada 10 unidades, y fuente y tamaño de las mismas
+# set ytics 10										# Marcas en el eje Y cada 10 unidades (empezará desde el origen de coordenadas)
+
+# unset xtics										# Elimina las marcas (y valores) en el eje X
+# unset ytics										# Elimina las marcas (y valores) en el eje Y
+
+set xtics										# Activa las marcas y valores en el eje X (las coloca donde cree mejor)
+set ytics										# Activa las marcas y valores en el eje Y (las coloca donde cree mejor)
+
+# set mxtics 2										# Número de subdivisiones entre las marcas del eje X
+# set mytics 2										# Número de subdivisiones entre las marcas del eje Y
+
+# set mxtics 1										# Crea una única división (es como no tenerlas)
+# set mytics 1										# Crea una única división (es como no tenerlas)	
+
+# unset mxtics
+# unset mytics		
+
+# set grid xtics mxtics ytics mytics 							# Pinta las líneas de la retícula (div y subdivisiones)
+
+set grid xtics ytics lw 0								# Pinta las líneas de la retícula (sólo divisiones principales)
+
+# unset grid										# Quitamos todas las líneas de la retícula que pudiera haber								
+
+
+f(x) = m*x + b										# Definimos la función para la regresión lineal
+fit f(x) 'RR05 data.txt' via m, b							# Le decimos que la ajuste a los puntos del archivo base
+
+
+# p 'PS 01 data.txt' w xyerrorbars t "Datos experimentales" lt 2, f(x) t "Recta de ajuste" lt 7 lw 3 		
+
+# Incluye al plotear: las barras de error (columnas 3 y 4), la leyenda del gráfico y la recta de ajuste calculada, y cambia el color y grosor de los puntos experimentales y de la línea calculada				
+
+# El color se puede llamar desde "lt" con números del 1 al 8, o desde "lt rgb" con la paleta de colores mostrada.. en este caso el color se llamará "#ff1493" para el dark-pink
+
+# show palette colornames								# Muestra la paleta de colores RGB que se puede usar para pintar las líneas	
+
+
+set key											# Los imprime
+unset key										# No imprime la leyendas del gráfico
+
+
+# set key outside									# Los imprime FUERA del área del gráfico
+
+# set key inside									# Los imprime DENTRO del área del gráfico
+
+# set key font "Arial, 14"								# Define el tipo de letra y el tamaño para las leyendas del gráfico
+
+set key top left									# Define la posición de las leyendas en arriba a la izquierda
+
+set key at -0.05, 0.75									# Define la posición de las leyendas con coordenadas
+
+
+set label 1 '$\sin \theta_t = m \sin \theta_i + b$' at graph 0.42, 0.28			# Se crea una etiqueta, la llama "1" y con todos los valores (posición, tamaño, fuente, etc) por defecto
+set label 2 '$m = 0,725 \pm 0,009$' at graph 0.42, 0.18	
+set label 3 '$b = -0,002 \pm 0,011$' at graph 0.42, 0.08
+
+
+
+
+
+set errorbars 0.5									# Establece en 0.5 (mínimo 0, máximo 1.0) el tamaño de los extremos de las barras de error
+
+
+
+
+# set term png size 1920,1080								# Indica al programa que vamos a exportar la imagen en formato PNG, y la resolución de la misma
+# set output "RR05.png" 								# Da nombre al archivo de la imagen
+
+set term epslatex size 3.1, 3								# Para exportar la impagen en formato LaTeX y su tamaño
+set output "Gráficas/RR05.tex"								# Adjudicamos el nombre de la imagen
+
+
+plot 'RR05 data.txt' w xyerrorbars t "Datos exp.", f(x) t "Recta ajuste" lt rgb "#ff1493" 		# lw 1	
+
+# plot 'RR05 data.txt' w xyerrorbars							# Graficamos con barras de error
+
+# plot 'RR05 data.txt' w xyerrorbars, f(x)						# Graficamos con barras de error y recta de regresión lineal
+
+unset output										# Cerramos el archivo, si no no guarda y codifica bien los datos que hemos ploteado!
+
+
+set term qt										# Instaura de nuevo el terminal 'normal'
+
+replot 											# Para que grafique nuevamente, y veamos la gráfica creada en la salida 'normal'
+
+

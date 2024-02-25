@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+  \providebibliographyfont{name}{}%
+  \providebibliographyfont{lastname}{}%
+  \providebibliographyfont{title}{\emph}%
+  \providebibliographyfont{jtitle}{\btxtitlefont}%
+  \providebibliographyfont{etal}{\emph}%
+  \providebibliographyfont{journal}{}%
+  \providebibliographyfont{volume}{}%
+  \providebibliographyfont{ISBN}{\MakeUppercase}%
+  \providebibliographyfont{ISSN}{\MakeUppercase}%
+  \providebibliographyfont{url}{\url}%
+  \providebibliographyfont{numeral}{}%
+  \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+
+\expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+\bibitem {newton1952opticks}
+\btxnamefont {\btxlastnamefont {Newton}, Isaac}\btxauthorcolon\ \btxtitlefont
+  {Opticks: or, a treatise of the reflections, refractions, inflections and
+  colours of light}.
+\newblock \btxpublisherfont {Courier Corporation}, 1952.
+
+\bibitem {descartes1664monde}
+\btxnamefont {\btxlastnamefont {Descartes}, Ren{\'e}}\btxauthorcolon\
+  \btxtitlefont {Le Monde de M. Descartes, ou le Trait{\'e} de la lumi{\`e}re
+  et des autres principaux objets des sens}.
+\newblock \btxpublisherfont {M. Bobin et N. Le Gras}, 1664.
+
+\bibitem {huygens1703dioptrica}
+\btxnamefont {\btxlastnamefont {Huygens}, Christiaan}\btxauthorcolon\
+  \btxtitlefont {Dioptrica}.
+\newblock \btxpublisherfont {unknown}, 1703.
+\newblock Incluye la ley de Snell descubierta por Willebrord van Roijen Snel.
+
+\end{thebibliography}

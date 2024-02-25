@@ -1,0 +1,163 @@
+
+# Esto es un comentario, no se procesará.
+
+# En primer lugar, hemos de abrir un terminal en nuestro sistema operativo.
+
+# Pulsando la tecla 'cmd' en un Mac y el '+' aumentamos el tamaño de la fuente tanto en TextEdit como en la pantalla del terminal. Con 'cmd' + '-', la disminuimos.
+
+# Con el comando "ls" vemos en qué directorio estamos (y los archivos que contiene).
+
+# Con el comando "cd" vamos cambiando de directorio, ayudándonos con el "TAB" para completar los nombres de los mismos. Así nos situamos en el directorio que trabajaremos con GNUplot.
+
+# Los argumentos en GNUplot que necesitan comillas, pueden llevar bien comillas simples o dobles, el funcionamiento es idéntico --> NO!!!! Por ejmplo, los textos introducidos con formato matemático LaTeX (dentro de los $....$), los símbolos que precisan de la barra invertida "\" (por ejmplo, $\theta$) SÍ funcionan si van entre comillas simples y NO funcionan si van entre comillas dobles.
+
+
+gnuplot											# Ejecuta GNUplot y nos deja el cursor de espera de entrada de comandos
+
+help comando argumentos									# Nos muestra la ayuda del comando en cuestión
+
+pwd											# Print Working Directory, para confirmar el directorio en el que estamos trabajando
+
+reset session										# Reseteo 'suave' de la sesión y de las variables sobre todo!!!
+
+plot x											# Plotea la función y = x
+plot sin(x)										# Plotea la función y = sin(x)
+
+p x											# Plotea la función y = x
+p sin(x)										# Plotea la función y = sin(x)
+
+plot sin(x), cos(x)									# Plotea ambas funciones en el mismo gráfico
+
+
+plot sin(x) linewidth 2									# Cambia el grosor de la línea de ploteado
+plot sin(x) lw 5									# Cambia el grosor de la línea de ploteado
+plot sin(x) linewidth "default"								# Vuelve al grosor por defecto (es como indicar grosor "0")
+plot sin(x) lw 'default'								# Vuelve al grosor por defecto
+plot sin(x) linewidth 1 linecolor rgb "green"						# Cambia el color de la línea de ploteado (blue, red, black, yellow, pink, etc)
+plot sin(x) linewidth 1 lt rgb 'green'							# Cambia el color de la línea de ploteado (blue, red, black, yellow, pink, etc)
+plot sin(x) lw 1 lt 5									# También se puede usar lt (o "linecolor") sin "rgb" pero con números del 0 al 8
+plot sin(x) lw "default" lt "default"							# Vuelve al grosor y color por defecto
+
+show palette colornames									# Muestra todas las opciones de colores RGB; podemos llamarlos "black" o "#000000"
+plot sin(x) lt rgb "black" == plot sin(x) lt rgb '#000000'
+
+
+# Para incluir un superíndice, lo precedemos de '^' (ejemplo: T^2). Para incluir varios, '^{2345}' (ejemplo: T^{2345}).
+
+# Para incluir un subíndice, usamos '_' (ejemplo: T_i). Para incluir varios, '_{12345} (ejemplo: T_{12345}).
+
+
+set title 'Péndulo simple'								# Establece el título del gráfico y lo muestra
+set title "Péndulo simple"								# Establece el título del gráfico
+set title 'Péndulo simple' font 'default, default'					# Establecemos fuente y tamaño de la letra (aquí los valores por defecto para ambos)
+unset title										# Borra el título del gráfico y por lo tanto después no se muestra
+set title										# Ya no hay título así que no muestra nada salvo que lo volvamos a indicar entre comillas
+
+set xlabel 'Tiempo (s)' font "Arial, 12"						# Establece título del eje X y su fuente y tamaño
+set ylabel 'Distancia (m)' font "default, 13"						# Establece título del eje Y y su fuente y tamaño
+
+
+replot											# Me vuelve a dibujar la(s) última(s) función(es) definida(s) con los nuevos cambios incorporados
+rep											# Me vuelve a dibujar la(s) última(s) función(es) definida(s) con los nuevos cambios incorporados
+
+
+unset key										# Por definición nos indica en una esquina las leyendas del gráfico, así lo eliminamos del output
+set key											# Volvemos a incluir las leyendas
+set key outside										# Le indicamos que nos escriba las leyendas FUERA del área del gráfico
+set key inside										# Le indicamos que nos escriba las leyendas DENTRO del área del gráfico
+set key {left | right | center} {top | bottom | center}					# Le indicamos la posición dentro del gráfico. También es creo a partir de donde empezará a contar las coordenadas
+set key left top
+
+set key at x, y, z									# Indicamos la posición de las leyendas por coordenadas (según los valores de los ejes de la gráfica!)
+set key at graph {0 < x < 1, 0 < y < 1}							# Indicamos la posición de las leyendas por posición dentro del tamaño de la gráfica
+
+set label 1 'y = m*x + b'								# Se crea una etiqueta, la llama "1" y con todos los valores (posición, tamaño, fuente, etc) por defecto
+set label 2 'f(x) = √x' at graph 0.5, 0.5 font 'default, 16'				# Se crea una etiqueta, la llama "2", la coloca en la posición CENTRAL (0.5, 0.5), tipo de letra default, tamaño 16
+set label 3 'f(x) = √x' at graph {0 < x < 1, 0 < y < 1}					# La posición se indica desde el borde inferior izquierdo del gráfico (0, 0) al superior derecho (1, 1)
+
+
+set errorbars {small | large | fullwidth | <size>}					# Define el tamaño de los apéndices de las barras de error (small = 0, large = 1.0)
+
+set logscale x										# Establecemos escala logarítmica en el eje X
+set logscale y										# Establecemos escala logarítmica en el eje Y
+
+# OJO! Los xtics e ytics que aparecen por defecto en escalas logarítmicas son 10, 100, 1000, etc.. y los mxtics y mytics, van cada NUEVE espacios y no cada diez como en la escala decimal!!!
+	
+
+set xrange [10:20] 									# Rango del eje X
+set yrange [0.5:1.5] 									# Rango del eje Y
+
+set xrange restore									# Elimina el rango establecido y lo resetea
+set yrange restore									# Elimina el rango establecido y lo resetea
+
+set xrange [*:*]									# Elimina el rango establecido y lo resetea
+set yrange [*:*]									# Elimina el rango establecido y lo resetea
+
+
+
+set xtics 5, 12, 20 font "Arial, 12"							# Marcas en el eje X desde el 5 y cada 12 unidades, y fuente y tamaño de las mismas
+set ytics 12										# Marcas en el eje Y cada 12 unidades
+unset xtics										# Quita las marcas del eje X
+unset ytics										# Quita las marcas del eje Y
+set xtics autofreq									# Resetea a las marcas en ambos ejes por defecto que el programa elige automáticamente
+
+set xtics (700, 800, 900, 1000, 1100, 1200)						# Definimos exactamente dónde queremos los xtics
+set ytics (100, 200, 300, 400)								# Definimos exactamente dónde queremos los ytics
+
+set xtics add (1400)									# Si no lo incluye automáticamente GNUplot y nosotros sí queremos que aparezca
+
+set mxtics 5 										# Número de subdivisiones entre las marcas del eje X
+set mytics 10 										# Número de subdivisiones entre las marcas del eje Y
+set mxtics 1 == unset mxtics								# Crea una única división (es como no tenerlas)
+set mytics 1 == unset mxtics								# Crea una única división (es como no tenerlas)
+
+set grid xtics ytics									# Pinta la líneas de la retícula (divisiones)
+set grid xtics mxtics ytics mytics 							# Pinta la líneas de la retícula (divisiones y subdivisiones)
+unset grid										# Quita las líneas de retícula
+
+
+show {title | xlabel | ylabel | key | label 1 | xrange | yrange | *tics | etc}		# Nos muestra los valores actuales de lo que le pidamos
+
+
+plot 'Prueba.txt'									# Grafica los datos (X, Y) guardados en dos columnas separadas por tabs del archivo 'Prueba.txt'
+plot 'Prueba.txt' w xyerrorbars 							# Grafica tb barras de error de X e Y.. precisa que tengamos cuatro columnas de datos separadas por tabs
+
+
+reset session										# Si no se ha puesto ya, ponerlo siempre antes del comando 'fit' para que resetee las variables!!!
+
+f(x) = m*x + b 										# Se define una función lineal
+fit f(x) 'Prueba.txt' via m,b 								# Se ajustan a esa función los datos de las dos primeras columnas del archivo 'Prueba.txt'. Resetear antes las variables!!!
+g(x) = 9.81*x										# Definimos una curva teórica
+
+
+plot 'Prueba.txt' w xyerrorbars, f(x) 							# Incluye la recta de ajuste calculada
+plot 'Prueba.txt' w xyerrorbars t "Péndulo simple", f(x) 				# Cambia el título del gráfico
+plot 'Prueba.txt' w xyerrorbars t "Péndulo simple", f(x) t "Regresión lineal" lt 7 	# Cambia el color de la línea de f(x)
+
+
+plot 'Prueba.txt' lt 7 lw 10								# Pinta los puntos experimentales del color #7 y de tamaño 10
+plot 'Prueba.txt' lt rgb "#c8c800" 							# Pinta los puntos experimentales del color DarkYellow
+plot 'Prueba.txt' w xyerrorbars, f(x) lw 3 						# Pinta los puntos con sus barras de error y la función con grosor 3
+
+set terminal dumb									# Cambia el terminal a modo ASCII en pantalla	
+set term dumb										# Cambia el terminal a modo ASCII en pantalla	
+set t dumb										# Cambia el terminal a modo ASCII en pantalla	
+									
+set term png size 1000, 800								# Indica al programa que vamos a exportar la imagen en formato png y su tamaño
+set output "NombreImagen.png" 								# Da nombre al archivo de la imagen
+plot sin(x)										# Se plotea de nuevo y se guarda con formato PNG en NombreImagen.png
+
+set terminal epslatex									# El terminal usado para gráficas que se incluirán en documentos LaTeX
+set output "ImageName.tex"								# Imprescindible indicar el nombre del archivo de salida, siempre ha de ser un archivo tipo .tex
+set o "ImageName.tex"									# Lo mismo pero con diminutivo
+plot sin(x)										# Ploteamos la función que ahora irá al archivo que le hemos indicado, "ImageName.tex"
+unset output										# IMPORTANTE!!! Cierra el archivo "ImageName.tex", si no lo cerramos se queda como dañado sin codificar bien la info enviada
+
+
+replot 											# Para que grafique nuevamente
+q 											# Salir del software
+
+load 'Script.txt' 									# Nos permite tener las órdenes para cada gráfica en un archivo llamado Script.txt y cargarlo después con load desde GNUplot
+
+
+

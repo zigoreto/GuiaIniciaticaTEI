@@ -1,0 +1,14 @@
+% IMPORTANTÍSIMO CUANDO TRABAJAMOS CON GRÁFICAS GENERADAS POR GNUPLOT EN LaTeX!!!!!
+
+% 1) NUNCA INCLUIREMOS ESPACIOS EN LOS NOMBRES. El convertidor eps-to-pdf falla. No hay problema en cambio con los acentos.
+
+% 2) OJO CON GUARDAR LAS GRÁFICAS EN DIRECTORIOS DENTRO DEL PRINCIPAL DONDE SE ENCUENTRE EL ARCHIVO DE LaTeX:
+
+% 	Dentro del archivo ha de llamarse a la figura con:
+
+%	\input{Directorio_de_gráficas/Nombre_gráfica.tex}
+
+% 	PERO ADEMÁS DENTRO DEL ARCHIVO "Nombre_gráfica.tex", al final del mismo y cuando se llama a la imagen,
+% 	TAMBIÉN HACE FALTA INDICAR EL PATH CON EL DIRECTORIO:
+
+% 	\put(0,0){\includegraphics[width={360.00bp},height={252.00bp}]{Directorio_de_gráficas/Nombre_gráfica}}%
